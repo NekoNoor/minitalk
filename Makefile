@@ -6,7 +6,7 @@
 #    By: nschat <nschat@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/06/17 17:19:37 by nschat        #+#    #+#                  #
-#    Updated: 2021/06/17 17:35:52 by nschat        ########   odam.nl          #
+#    Updated: 2021/06/17 17:39:37 by nschat        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,6 @@ vpath %.c src_client src_server
 .PHONY: clean fclean
 
 all: $(NAME)
-
-$(NAME): $(NAME_CLIENT) $(NAME_SERVER)
 
 $(NAME_CLIENT): $(OBJ_CLIENT)
 	$(CC) $(CFLAGS) $^ -o $@
