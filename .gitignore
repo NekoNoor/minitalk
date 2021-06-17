@@ -1,0 +1,4 @@
+client
+server
+src_client/*.o
+src_server/*.o
