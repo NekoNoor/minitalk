@@ -6,11 +6,12 @@
 /*   By: nschat <nschat@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/17 17:36:20 by nschat        #+#    #+#                 */
-/*   Updated: 2021/06/18 10:45:01 by nschat        ########   odam.nl         */
+/*   Updated: 2021/06/18 11:49:38 by nschat        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <signal.h>
 
 int ft_isnum(int c)
 {
@@ -25,11 +26,10 @@ int ft_atoi(char *s)
 	int n;
 
 	n = 0;
+	sign = 1;
 	if (*s == '+' || *s == '-')
 	{
-		if (*s == '+')
-			sign = 1;
-		else
+		if (*s == '-')
 			sign = -1;
 		s++;
 	}
@@ -46,7 +46,7 @@ size_t ft_strlen(char *s)
 	size_t len;
 
 	len = 0;
-	while (*s != '\0')
+	while (s[len] != '\0')
 		len++;
 	return (len);
 }
@@ -64,6 +64,8 @@ int main(int ac, char **av)
 	if (ac != 3)
 		return (1);
 	pid = ft_atoi(av[1]);
+	kill(pid, SIGUSR1);
+	kill(pid, SIGUSR2);
 	ft_putstr(av[2]);
 	return (0);
 }

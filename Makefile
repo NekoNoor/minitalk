@@ -6,12 +6,12 @@
 #    By: nschat <nschat@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/06/17 17:19:37 by nschat        #+#    #+#                  #
-#    Updated: 2021/06/17 17:39:37 by nschat        ########   odam.nl          #
+#    Updated: 2021/06/18 11:42:39 by nschat        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 SRC_CLIENT = src_client/main.c
 SRC_SERVER = src_server/main.c
