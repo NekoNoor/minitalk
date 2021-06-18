@@ -6,7 +6,7 @@
 /*   By: nschat <nschat@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/17 17:37:17 by nschat        #+#    #+#                 */
-/*   Updated: 2021/06/17 17:53:25 by nschat        ########   odam.nl         */
+/*   Updated: 2021/06/18 10:32:41 by nschat        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,30 @@ void ft_putnbr(int n)
 	ft_putchar((n % 10) + '0');
 }
 
+size_t ft_strlen(char *s)
+{
+	size_t len;
+
+	len = 0;
+	while (*s != '\0')
+		len++;
+	return (len);
+}
+
+void ft_putstr(char *s)
+{
+	if (s != NULL)
+		write(1, s, ft_strlen(s));
+}
+
+void sighandler(int signum)
+{
+	if (signum == SIGUSR1)
+		ft_putstr("sigusr1\n");
+	if (signum == SIGUSR2)
+		ft_putstr("sigusr2\n");
+}
+
 int main(void)
 {
 	pid_t pid;
@@ -43,6 +67,14 @@ int main(void)
 	pid = getpid();
 	ft_putnbr(pid);
 	ft_putchar('\n');
+
+	signal(SIGUSR1, sighandler);
+	signal(SIGUSR2, sighandler);
+
+	while (1)
+	{
+		sleep(1);
+	}
 
 	return (0);
 }
