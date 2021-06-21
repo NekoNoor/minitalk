@@ -6,7 +6,7 @@
 /*   By: nschat <nschat@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/17 17:37:17 by nschat        #+#    #+#                 */
-/*   Updated: 2021/06/21 16:28:26 by nschat        ########   odam.nl         */
+/*   Updated: 2021/06/21 16:32:00 by nschat        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <signal.h>
 #include "helpers.h"
 
-void sighandler(int signum)
+void	sighandler(int signum)
 {
 	if (signum == SIGUSR1)
 		ft_putstr("sigusr1\n");
@@ -22,21 +22,18 @@ void sighandler(int signum)
 		ft_putstr("sigusr2\n");
 }
 
-int main(void)
+int	main(void)
 {
-	pid_t pid;
+	pid_t	pid;
 
 	pid = getpid();
 	ft_putnbr(pid);
 	ft_putchar('\n');
-
 	signal(SIGUSR1, sighandler);
 	signal(SIGUSR2, sighandler);
-
 	while (1)
 	{
 		sleep(1);
 	}
-
 	return (0);
 }
