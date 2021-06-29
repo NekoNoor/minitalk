@@ -6,7 +6,7 @@
 /*   By: nschat <nschat@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/17 17:36:20 by nschat        #+#    #+#                 */
-/*   Updated: 2021/06/29 15:54:31 by nschat        ########   odam.nl         */
+/*   Updated: 2021/06/29 17:03:18 by nschat        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	send_string(char *str, pid_t pid)
 				kill(pid, SIGUSR1);
 			chr >>= 1;
 			i++;
-			usleep(5);
+			usleep(10);
 		}
 		str++;
 	}
