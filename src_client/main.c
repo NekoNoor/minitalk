@@ -6,11 +6,12 @@
 /*   By: nschat <nschat@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/17 17:36:20 by nschat        #+#    #+#                 */
-/*   Updated: 2021/06/21 16:33:35 by nschat        ########   odam.nl         */
+/*   Updated: 2021/06/29 15:54:31 by nschat        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
+#include <unistd.h>
 #include "helpers.h"
 
 static int	ft_atoi(char *s)
@@ -34,15 +35,33 @@ static int	ft_atoi(char *s)
 	return (n * sign);
 }
 
+void	send_string(char *str, pid_t pid)
+{
+	unsigned char	chr;
+	int				i;
+
+	while (*str != '\0')
+	{
+		chr = 0b10000000;
+		i = 0;
+		while (i < 8)
+		{
+			if (*str & chr)
+				kill(pid, SIGUSR2);
+			else
+				kill(pid, SIGUSR1);
+			chr >>= 1;
+			i++;
+			usleep(5);
+		}
+		str++;
+	}
+}
+
 int	main(int ac, char **av)
 {
-	int	pid;
-
 	if (ac != 3)
 		return (1);
-	pid = ft_atoi(av[1]);
-	kill(pid, SIGUSR1);
-	kill(pid, SIGUSR2);
-	ft_putstr(av[2]);
+	send_string(av[2], ft_atoi(av[1]));
 	return (0);
 }
