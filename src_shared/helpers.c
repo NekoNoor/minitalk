@@ -6,7 +6,7 @@
 /*   By: nschat <nschat@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/21 16:16:21 by nschat        #+#    #+#                 */
-/*   Updated: 2021/06/21 16:33:59 by nschat        ########   odam.nl         */
+/*   Updated: 2021/06/30 17:20:07 by nschat        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	ft_putnbr(int n)
 	ft_putchar((n % 10) + '0');
 }
 
-void	ft_putstr(char *s)
+void	ft_putstr_fd(char *s, int fd)
 {
 	if (s != NULL)
-		write(1, s, ft_strlen(s));
+		write(fd, s, ft_strlen(s));
 }

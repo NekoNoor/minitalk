@@ -6,7 +6,7 @@
 /*   By: nschat <nschat@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/17 17:37:17 by nschat        #+#    #+#                 */
-/*   Updated: 2021/06/30 17:16:58 by nschat        ########   odam.nl         */
+/*   Updated: 2021/06/30 17:20:41 by nschat        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@
 
 int				g_i;
 unsigned char	g_c;
-pid_t			g_pid;
 
 void	sighandler(int sig, siginfo_t *info, void *context)
 {
+	pid_t	pid;
+
 	(void)context;
-	g_pid = info->si_pid;
+	pid = info->si_pid;
 	if (sig == SIGUSR2)
 		g_c |= 1;
 	if (g_i == 7)
@@ -31,7 +32,7 @@ void	sighandler(int sig, siginfo_t *info, void *context)
 		else
 		{
 			usleep(50);
-			kill(g_pid, SIGUSR1);
+			kill(pid, SIGUSR1);
 		}
 	}
 	g_c <<= 1;
@@ -43,10 +44,10 @@ void	sighandler(int sig, siginfo_t *info, void *context)
 int	main(void)
 {
 	struct sigaction	sa;
-	pid_t	pid;
+	pid_t				pid;
 
 	pid = getpid();
-	ft_putstr("Server pid: ");
+	ft_putstr_fd("Server pid: ", 1);
 	ft_putnbr(pid);
 	ft_putchar('\n');
 	g_i = 0;

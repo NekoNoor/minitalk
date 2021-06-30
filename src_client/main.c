@@ -6,7 +6,7 @@
 /*   By: nschat <nschat@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/17 17:36:20 by nschat        #+#    #+#                 */
-/*   Updated: 2021/06/30 17:16:52 by nschat        ########   odam.nl         */
+/*   Updated: 2021/06/30 17:21:57 by nschat        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	send_byte(char str_c, pid_t pid)
 			sig = SIGUSR1;
 		if (kill(pid, sig) == -1)
 		{
-			ft_putstr("Invalid pid\n");
+			ft_putstr_fd("Invalid pid\n", 2);
 			exit(1);
 		}
 		chr >>= 1;
@@ -74,7 +74,7 @@ void	send_string(char *str, pid_t pid)
 void	success(int signum)
 {
 	(void)signum;
-	ft_putstr("String received by server\n");
+	ft_putstr_fd("String received by server\n", 1);
 	exit(0);
 }
 
@@ -82,9 +82,9 @@ int	main(int ac, char **av)
 {
 	if (ac != 3)
 	{
-		ft_putstr("Invalid parameters, use ");
-		ft_putstr(av[0]);
-		ft_putstr(" [pid] [string]\n");
+		ft_putstr_fd("Invalid parameters, use ", 2);
+		ft_putstr_fd(av[0], 2);
+		ft_putstr_fd(" [pid] [string]\n", 2);
 		return (1);
 	}
 	signal(SIGUSR1, success);
